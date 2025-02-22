@@ -1,0 +1,172 @@
+<html>
+	<head>
+		<style>
+			body {
+				background-color: lightblue;
+			}
+			table {
+				background-color: white;
+				border: 6px solid rgb(117, 170, 177);
+				border-collapse: separate;
+				border-radius: 9px;
+			}
+			script {
+			display: show;
+			}
+
+		</style>
+		<link rel=”stylesheet” type=”text/css” href=”estilo.css”>
+		<title>Agendamento de Consulta </title>
+   	</head>
+
+	<body>
+		<table width="50%" border="6">
+    		<tbody>
+				<tr>
+					<th colspan="7"><h1>Março</h1></th>
+				</tr>
+				<tr>
+					<th>Domingo</th>
+					<th>Segunda</th>
+					<th>Terça</th>
+					<th>Quarta</th>
+					<th>Quinta</th>
+					<th>Sexta</th>
+					<th>Sábado</th>
+				</tr>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>1</td>
+				<tr>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+				</tr>
+				<tr>
+					<td>9</td>
+					<td>10</td>
+					<td>11</td>
+					<td>12</td>
+					<td>13</td>
+					<td>14</td>
+					<td>15</td>
+				</tr>
+				<tr>
+					<td>16</td>
+					<td>17</td>
+					<td>18</td>
+					<td>19</td>
+					<td>20</td>
+					<td>21</td>
+					<td>22</td>
+				</tr>
+				<tr>
+					<td>23</td>
+					<td>24</td>
+					<td>25</td>
+					<td>26</td>
+					<td>27</td>
+					<td>28</td>
+					<td>29</td>
+				</tr>
+				<tr>
+					<td>30</td>
+					<td>31</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+   			</tbody>
+		</table>
+		<table width="50%" border="6">
+			<tbody id="calendario">
+			</tbody>
+		</table>
+		<script type="text/javascript">
+
+			const dataAtual = new Date();
+			const ano = dataAtual.getFullYear();
+			const mes = dataAtual.getMonth();
+
+			function gerarCalendario(ano, mes) {
+
+				const SEMANAS_POR_MES = 6;
+				const DIAS_POR_SEMANA = 7;
+
+				const bodyCalendario = document.getElementById("calendario");
+
+				// Pegar dia da semana
+				const primeiroDia = new Date(ano, mes, 1).getDay();
+
+				// Ao buscar o dia 0 do mês que vem, temos o ultimo dia do mês atual (número de dias do mês)
+				const diasNoMes = new Date(ano, mes + 1, 0).getDate();
+				let dia = 1;
+
+				// linhas por calendario (semanas)
+				// corrigir para deixar semana dinâmico
+				for (let i = 0; i < SEMANAS_POR_MES; i++) {
+
+					let linha_semana = document.createElement("tr");
+					console.log("semana ", i + 1);
+
+					for (let j = 0; j < DIAS_POR_SEMANA - 1; j++) {
+
+						let coluna_dia = document.createElement("td");
+						coluna_dia.textContent = "";
+
+						if (i == 0) {
+							console.log("linha semana 1");
+						}
+
+						linha_semana.appendChild(coluna_dia);
+					}
+
+					bodyCalendario.appendChild(linha_semana);
+				}
+			}
+
+
+
+
+	// function createCalendar(year, month) {
+	// 	const calendarBody = document.getElementById('calendar-body');
+	// 	const firstDay = new Date(year, month, 1).getDay();
+	// 	const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+	// 	let date = 1;
+	// 	for (let i = 0; i < 5; i++) {
+	// 		let row = document.createElement('tr');
+
+	// 		for (let j = 0; j < 7; j++) {
+	// 			let cell = document.createElement('td');
+
+	// 			if (i === 0 && j < firstDay) {
+	// 				cell.textContent = '';
+	// 			} else if (date > daysInMonth) {
+	// 				break;
+	// 			} else {
+	// 				cell.textContent = date;
+	// 				date++;
+	// 			}
+	// 			row.appendChild(cell);
+	// 		}
+
+	// 		calendarBody.appendChild(row);
+	// 	}
+	// }
+
+		gerarCalendario(ano, mes);
+		</script>
+	</body>
+</html>
