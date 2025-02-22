@@ -111,6 +111,7 @@
 
 				// Ao buscar o dia 0 do mês que vem, temos o ultimo dia do mês atual (número de dias do mês)
 				const diasNoMes = new Date(ano, mes + 1, 0).getDate();
+				console.log(diasNoMes)
 				let dia = 1;
 
 				// linhas por calendario (semanas)
@@ -120,13 +121,19 @@
 					let linha_semana = document.createElement("tr");
 					console.log("semana ", i + 1);
 
-					for (let j = 0; j < DIAS_POR_SEMANA - 1; j++) {
+					for (let j = 0; j < DIAS_POR_SEMANA; j++) {
 
 						let coluna_dia = document.createElement("td");
-						coluna_dia.textContent = "";
 
-						if (i == 0) {
-							console.log("linha semana 1");
+						if (i == 0 && j < primeiroDia) {
+							coluna_dia.textContent = "";
+						}
+						else if (dia > diasNoMes) {
+							coluna_dia.textContent = "";
+						}
+						else {
+							coluna_dia.textContent = dia;
+							dia++;
 						}
 
 						linha_semana.appendChild(coluna_dia);
@@ -135,36 +142,6 @@
 					bodyCalendario.appendChild(linha_semana);
 				}
 			}
-
-
-
-
-	// function createCalendar(year, month) {
-	// 	const calendarBody = document.getElementById('calendar-body');
-	// 	const firstDay = new Date(year, month, 1).getDay();
-	// 	const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-	// 	let date = 1;
-	// 	for (let i = 0; i < 5; i++) {
-	// 		let row = document.createElement('tr');
-
-	// 		for (let j = 0; j < 7; j++) {
-	// 			let cell = document.createElement('td');
-
-	// 			if (i === 0 && j < firstDay) {
-	// 				cell.textContent = '';
-	// 			} else if (date > daysInMonth) {
-	// 				break;
-	// 			} else {
-	// 				cell.textContent = date;
-	// 				date++;
-	// 			}
-	// 			row.appendChild(cell);
-	// 		}
-
-	// 		calendarBody.appendChild(row);
-	// 	}
-	// }
 
 		gerarCalendario(ano, mes);
 		</script>
