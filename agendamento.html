@@ -6,12 +6,23 @@
 			}
 			table {
 				background-color: white;
-				border: 6px solid rgb(117, 170, 177);
+				border: 6px solid rgb(102, 173, 182);
 				border-collapse: separate;
 				border-radius: 9px;
+				margin: 20px auto;
 			}
 			script {
 			display: show;
+			}
+			th, td {
+				border: 1px solid #000;
+				text-align: center;
+				padding: 8px;
+				height: 40px;
+				background-color: #f0f0f0;
+			}
+			h1 {
+				margin: 0;
 			}
 
 		</style>
@@ -20,10 +31,15 @@
    	</head>
 
 	<body>
+
 		<table width="50%" border="6">
-    		<tbody>
+			<tbody id="calendario">
 				<tr>
-					<th colspan="7"><h1>Março</h1></th>
+					<th colspan="7">
+						<h1 id="titulo-calendario">
+							Calendário
+						</h1>
+					</th>
 				</tr>
 				<tr>
 					<th>Domingo</th>
@@ -34,70 +50,16 @@
 					<th>Sexta</th>
 					<th>Sábado</th>
 				</tr>
-				<tr>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td>1</td>
-				<tr>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td>9</td>
-					<td>10</td>
-					<td>11</td>
-					<td>12</td>
-					<td>13</td>
-					<td>14</td>
-					<td>15</td>
-				</tr>
-				<tr>
-					<td>16</td>
-					<td>17</td>
-					<td>18</td>
-					<td>19</td>
-					<td>20</td>
-					<td>21</td>
-					<td>22</td>
-				</tr>
-				<tr>
-					<td>23</td>
-					<td>24</td>
-					<td>25</td>
-					<td>26</td>
-					<td>27</td>
-					<td>28</td>
-					<td>29</td>
-				</tr>
-				<tr>
-					<td>30</td>
-					<td>31</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-   			</tbody>
-		</table>
-		<table width="50%" border="6">
-			<tbody id="calendario">
 			</tbody>
 		</table>
 		<script type="text/javascript">
 
-			const dataAtual = new Date();
-			const ano = dataAtual.getFullYear();
-			const mes = dataAtual.getMonth();
+			const mes = prompt("Escolha o mês (1-12): ");
+			const ano = prompt("Escolha o ano (AAAA): ");
+
+			// Converter os valores para números inteiros
+			const mesInt = parseInt(mes, 10) - 1;
+			const anoInt = parseInt(ano, 10);
 
 			function gerarCalendario(ano, mes) {
 
@@ -105,6 +67,13 @@
 				const DIAS_POR_SEMANA = 7;
 
 				const bodyCalendario = document.getElementById("calendario");
+
+				const nomesMeses = [
+					"Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+					"Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+				];
+
+				document.getElementById("titulo-calendario").textContent = nomesMeses[mes];
 
 				// Pegar dia da semana
 				const primeiroDia = new Date(ano, mes, 1).getDay();
@@ -118,8 +87,11 @@
 				// corrigir para deixar semana dinâmico
 				for (let i = 0; i < SEMANAS_POR_MES; i++) {
 
+					if (dia > diasNoMes) {
+						break;
+					}
 					let linha_semana = document.createElement("tr");
-					console.log("semana ", i + 1);
+
 
 					for (let j = 0; j < DIAS_POR_SEMANA; j++) {
 
@@ -143,7 +115,7 @@
 				}
 			}
 
-		gerarCalendario(ano, mes);
+		gerarCalendario(anoInt, mesInt);
 		</script>
 	</body>
 </html>
